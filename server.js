@@ -35,7 +35,6 @@ app.get('/download', (req, res) => {
 app.post('/delete', (req, res) => {
   fs.unlink(`./public/${req.body.name}`, (err) => {
     if (err) throw err;
-    console.log('path/file.txt was deleted');
   });
   res.send('Xoá thành công');
 });
@@ -56,7 +55,6 @@ app.post('/download/', (req, res) => {
     allowWebm: false,
   });
 
-  //Download video and save as MP3 file
   YD.download(pathMusic, `${nameMusic}.mp3`);
 
   YD.on('finished', function (err, data) {
