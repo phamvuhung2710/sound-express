@@ -47,7 +47,7 @@ app.post('/download/', (req, res) => {
   pathMusic = pathMusic.replace('https://www.youtube.com/watch?v=', '').trim();
   nameMusic = nameMusic.toLowerCase();
   nameMusic = removeVietnameseTones(nameMusic);
-  nameMusic = nameMusic.replaceAll(' ', '-').trim();
+  nameMusic = nameMusic.replaceAll(/ /g, '-').trim();
 
   var YD = new YoutubeMp3Downloader({
     ffmpegPath: `ffmpeg/bin/ffmpeg.exe`, // FFmpeg binary location
