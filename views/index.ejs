@@ -25,14 +25,14 @@
         <% for(var i = 0; i < listMusic.length; i++) { %>
         <li class="mb-2">
           <a target="_blank" href="/<%= listMusic[i] %>"><%= listMusic[i] %></a>
-          <button
+          <!-- <button
             onclick="copyToClipboard(event)"
             type="button"
             class="btn btn-primary ml-2"
             data-music="<%= listMusic[i] %>"
           >
             Copy
-          </button>
+          </button> -->
           <button
             onclick="deleteMusic(event)"
             type="button"
@@ -61,22 +61,23 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      function copyToClipboard(event) {
-        const url = window.location.href
-        navigator.clipboard.writeText(`${url}${event.target.dataset.music}`)
-      }
+      // function copyToClipboard(event) {
+      //   console.log('event: ', event.target.dataset.music);
+      //   const url = window.location.href;
+      //   navigator.clipboard.writeText(`${url}${event.target.dataset.music}`);
+      // }
 
       function deleteMusic(event) {
-        const idMusic = event.target.dataset.music
+        const idMusic = event.target.dataset.music;
         fetch(`/delete`, {
           method: 'post',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name: idMusic })
+          body: JSON.stringify({ name: idMusic }),
         }).then((data) => {
-          window.location.reload(true)
-        })
+          window.location.reload(true);
+        });
       }
     </script>
   </body>
