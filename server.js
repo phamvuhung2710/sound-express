@@ -11,10 +11,8 @@ const readdir = util.promisify(fs.readdir);
 
 const directoryPath = path.join(__dirname, 'public');
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -36,8 +34,8 @@ app.get('/download', (req, res) => {
 
 app.post('/delete', (req, res) => {
   fs.unlink(`./public/${req.body.name}`, (err) => {
-    if (err) throw err; //handle your error the way you want to;
-    console.log('path/file.txt was deleted'); //or else the file will be deleted
+    if (err) throw err;
+    console.log('path/file.txt was deleted');
   });
   res.send('Xoá thành công');
 });
@@ -50,12 +48,12 @@ app.post('/download/', (req, res) => {
   nameMusic = nameMusic.replace(/ /g, '-').trim();
 
   var YD = new YoutubeMp3Downloader({
-    ffmpegPath: `ffmpeg/bin/ffmpeg.exe`, // FFmpeg binary location
-    outputPath: `public`, // Output file location (default: the home directory)
-    youtubeVideoQuality: 'highestaudio', // Desired video quality (default: highestaudio)
-    queueParallelism: 2, // Download parallelism (default: 1)
-    progressTimeout: 2000, // Interval in ms for the progress reports (default: 1000)
-    allowWebm: false, // Enable download from WebM sources (default: false)
+    ffmpegPath: `ffmpeg/bin/ffmpeg.exe`,
+    outputPath: `public`,
+    youtubeVideoQuality: 'highestaudio',
+    queueParallelism: 2,
+    progressTimeout: 2000,
+    allowWebm: false,
   });
 
   //Download video and save as MP3 file
@@ -67,10 +65,6 @@ app.post('/download/', (req, res) => {
 
   YD.on('error', function (error) {
     console.log('error: ', error);
-  });
-
-  YD.on('progress', function (progress) {
-    console.log(JSON.stringify(progress));
   });
 });
 
